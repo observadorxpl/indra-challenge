@@ -48,8 +48,12 @@ public class SecurityConfig {
             //.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/v1/users/sign-up")
-                .permitAll()
+                .requestMatchers("/v1/users/sign-up").permitAll()
+                .requestMatchers(
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html"
+                ).permitAll()
                 .anyRequest()
                 .authenticated())
             .formLogin(withDefaults())
